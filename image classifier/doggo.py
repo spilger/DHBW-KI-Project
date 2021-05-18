@@ -3,12 +3,21 @@ import numpy as np
 import os
 import PIL
 import tensorflow as tf
-
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
-
 import pathlib
+
+# config
+batch_size = 32
+img_height = 180
+img_width = 180
+# modeloutput
+num_classes = 120
+#training
+epochs=10
+
+
 dataset_url = "http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar"
 data_dir = tf.keras.utils.get_file('Images', origin=dataset_url, untar=True)
 data_dir = pathlib.Path(data_dir)
@@ -18,15 +27,12 @@ print(image_count)
 
 appenzeller = list(data_dir.glob('n02086079-Pekinese/*'))
 PIL.Image.open(str(appenzeller[0]))
-
 PIL.Image.open(str(appenzeller[1]))
-
 chow = list(data_dir.glob('n02106030-collie/*'))
 PIL.Image.open(str(chow[0]))
 
-batch_size = 32
-img_height = 180
-img_width = 180
+
+
 
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
@@ -79,7 +85,7 @@ print(np.min(first_image), np.max(first_image))
 
 # Model
 
-num_classes = 120
+
 
 model = Sequential([
   layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
@@ -93,6 +99,7 @@ model = Sequential([
   layers.Dense(128, activation='relu'),
   layers.Dense(num_classes)
 ])
+# training
 
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -100,7 +107,7 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-epochs=10
+
 history = model.fit(
   train_ds,
   validation_data=val_ds,
