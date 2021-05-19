@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import PIL
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -24,15 +23,6 @@ data_dir = pathlib.Path(data_dir)
 print(data_dir)
 image_count = len(list(data_dir.glob('*/*.jpg')))
 print(image_count)
-
-appenzeller = list(data_dir.glob('n02086079-Pekinese/*'))
-PIL.Image.open(str(appenzeller[0]))
-PIL.Image.open(str(appenzeller[1]))
-chow = list(data_dir.glob('n02106030-collie/*'))
-PIL.Image.open(str(chow[0]))
-
-
-
 
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
