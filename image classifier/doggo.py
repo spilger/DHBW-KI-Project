@@ -95,20 +95,30 @@ data_augmentation = tf.keras.Sequential(
 
 
 # Erstellen des Modells
-model = Sequential([
-  data_augmentation,
-  layers.experimental.preprocessing.Rescaling(1./255),
-  layers.Conv2D(16, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(64, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Dropout(0.2),
-  layers.Flatten(),
-  layers.Dense(128, activation='relu'),
-  layers.Dense(num_classes)
-])
+input_tensor = layers.Input(shape=(img_width, img_height, 3))
+base_model = tf.keras.applications.MobileNetV2(
+    include_top=False,
+    weights='imagenet',
+    input_tensor=input_tensor,
+    input_shape=(img_width, img_height, 3),
+    pooling='avg')
+
+for layer in base_model.layers:
+    layer.trainable = True  # trainable has to be false in order to freeze the layers
+    
+op = layers.Dense(256, activation='relu')(base_model.output)
+op = layers.Dropout(.25)(op)
+
+##
+# softmax: calculates a probability for every possible class.
+#
+# activation='softmax': return the highest probability;
+# for example, if 'Coat' is the highest probability then the result would be 
+# something like [0,0,0,0,1,0,0,0,0,0] with 1 in index 5 indicate 'Coat' in our case.
+##
+output_tensor = layers.Dense(num_classes, activation='softmax')(op)
+
+model = tf.keras.Model(inputs=input_tensor, outputs=output_tensor)
 
 
 # Training und Validierung
