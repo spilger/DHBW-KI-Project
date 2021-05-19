@@ -16,7 +16,7 @@ img_width = 180  # Breite des Bildes
 num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
 
 # Training
-epochs = 10
+epochs = 100
 learning_rate = 0.001
 
 
@@ -31,7 +31,7 @@ print(image_count)
 # Vorbereitung des Trainings- und Testdatensatzes
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.3,
+  validation_split=0.2,
   subset="training",
   shuffle=True,
   seed=469,
@@ -41,7 +41,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
 # Vorbereitung des Validierungsdatensatzes
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.3,
+  validation_split=0.2,
   subset="validation",
   shuffle=True,
   seed=469,
@@ -124,6 +124,7 @@ history = model.fit(
   validation_data=val_ds,
   epochs=epochs
 )
+model.save('models/myModel')
 
 # Visualisierung der Ergebnisse
 acc = history.history['accuracy']
