@@ -16,7 +16,7 @@ img_width = 180  # Breite des Bildes
 num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
 
 # Training
-epochs = 10
+epochs = 30
 learning_rate = 0.001
 
 
@@ -31,7 +31,7 @@ print(image_count)
 # Vorbereitung des Trainings- und Testdatensatzes
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.3,
+  validation_split=0.2,
   subset="training",
   shuffle=True,
   seed=469,
@@ -41,7 +41,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
 # Vorbereitung des Validierungsdatensatzes
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.3,
+  validation_split=0.2,
   subset="validation",
   shuffle=True,
   seed=469,
@@ -88,26 +88,24 @@ data_augmentation = tf.keras.Sequential(
                                                  input_shape=(img_height, 
                                                               img_width,
                                                               3)),
-    layers.experimental.preprocessing.RandomRotation(0.1),
-    layers.experimental.preprocessing.RandomZoom(0.1),
   ]
 )
+#model von wem anders klauen
+base_model = tf.keras.applications.MobileNetV2(input_shape=(img_height, img_width) + (3, ),
+                                               include_top=False,
+                                               weights='imagenet')
+base_model.trainable = False
 
 
+
+prediction_layer = layers.Dense(num_classes)
 # Erstellen des Modells
 model = Sequential([
   data_augmentation,
   layers.experimental.preprocessing.Rescaling(1./255),
-  layers.Conv2D(16, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(64, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Dropout(0.2),
-  layers.Flatten(),
+  base_model(training=False),
   layers.Dense(128, activation='relu'),
-  layers.Dense(num_classes)
+  prediction_layer
 ])
 
 
