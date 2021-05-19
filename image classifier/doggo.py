@@ -17,6 +17,7 @@ num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
 
 # Training
 epochs = 10
+learning_rate = 0.001
 
 
 # Hochladen des Datensatzes
@@ -30,18 +31,20 @@ print(image_count)
 # Vorbereitung des Trainings- und Testdatensatzes
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.2,
+  validation_split=0.3,
   subset="training",
-  seed=123,
+  shuffle=True,
+  seed=469,
   image_size=(img_height, img_width),
   batch_size=batch_size)
 
 # Vorbereitung des Validierungsdatensatzes
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.2,
+  validation_split=0.3,
   subset="validation",
-  seed=123,
+  shuffle=True,
+  seed=469,
   image_size=(img_height, img_width),
   batch_size=batch_size)
 
@@ -78,16 +81,30 @@ first_image = image_batch[0]
 # Notice the pixels values are now in `[0,1]`.
 print(np.min(first_image), np.max(first_image))
 
+# Überanpassung loswerden
+data_augmentation = tf.keras.Sequential(
+  [
+    layers.experimental.preprocessing.RandomFlip("horizontal", 
+                                                 input_shape=(img_height, 
+                                                              img_width,
+                                                              3)),
+    layers.experimental.preprocessing.RandomRotation(0.1),
+    layers.experimental.preprocessing.RandomZoom(0.1),
+  ]
+)
+
 
 # Erstellen des Modells
 model = Sequential([
-  layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
+  data_augmentation,
+  layers.experimental.preprocessing.Rescaling(1./255),
   layers.Conv2D(16, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
   layers.Conv2D(32, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
   layers.Conv2D(64, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
+  layers.Dropout(0.2),
   layers.Flatten(),
   layers.Dense(128, activation='relu'),
   layers.Dense(num_classes)
@@ -95,7 +112,7 @@ model = Sequential([
 
 
 # Training und Validierung
-model.compile(optimizer='adam',
+model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
