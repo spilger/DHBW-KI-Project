@@ -24,7 +24,6 @@ num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
 epochs = 100
 learning_rate = 0.001
 
-
 # Hochladen des Datensatzes
 dataset_url = "http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar"
 data_dir = tf.keras.utils.get_file('Images', origin=dataset_url, untar=True)
