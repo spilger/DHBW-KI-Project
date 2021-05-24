@@ -24,6 +24,6 @@ print(image_count)
 data = DataLoader.from_folder(data_dir)
 train_data, validation_data = data.split(0.9)
 
-model = image_classifier.create(train_data, validation_data=validation_data, epochs=6, shuffle=True)
+model = image_classifier.create(train_data, validation_data=validation_data, epochs=6, shuffle=True, learning_rate=None)
 
 model.export(export_dir='./models', tflite_filename='dogModel.tflite')
