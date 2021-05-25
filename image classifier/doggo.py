@@ -5,6 +5,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.applications.densenet import DenseNet121, preprocess_input
 import pathlib
 
 # Config
@@ -89,26 +90,32 @@ data_augmentation = tf.keras.Sequential(
                                                  input_shape=(img_height, 
                                                               img_width,
                                                               3)),
-    layers.experimental.preprocessing.RandomRotation(0.1),
-    layers.experimental.preprocessing.RandomZoom(0.1),
+   # layers.experimental.preprocessing.RandomRotation(0.1),
+   # layers.experimental.preprocessing.RandomZoom(0.1),
   ]
 )
 
 
 # Erstellen des Modells
+
+
+backbone = DenseNet121(
+    weights='input/DenseNet-BC-121-32-no-top.h5',
+    include_top=False,
+    input_shape=(img_width,img_height,3)
+)
+
 model = Sequential([
   data_augmentation,
+  backbone,
   layers.experimental.preprocessing.Rescaling(1./255),
-  layers.Conv2D(16, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(64, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Dropout(0.2),
+  layers.GlobalAveragePooling2D(data_format=None),
+  layers.Dense(1024, activation="relu"),
+  layers.Dropout(0.5),
+  layers.Dense(512, activation="relu"),
+  layers.Dropout(0.5),
   layers.Flatten(),
-  layers.Dense(128, activation='relu'),
-  layers.Dense(num_classes)
+  layers.Dense(num_classes, activation="softmax")
 ])
 
 
