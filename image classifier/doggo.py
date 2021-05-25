@@ -106,12 +106,12 @@ backbone = DenseNet121(
 )
 
 x = backbone.output
-x = layers.GlobalAveragePooling2D()(x)
-x = layers.Dense(1024, activation="relu")(x)
-x = layers.Dropout(0.5)(x)
+x = layers.GlobalAveragePooling2D()(x) # Berechnen des durchschnittlichen Outputs aller Features des vorherigen Layers.
+x = layers.Dense(1024, activation="relu")(x) # Vollständig verbundene Schicht
+x = layers.Dropout(0.5)(x) # Entfernt unwichtige features - effizienteres Training
 x = layers.Dense(512, activation="relu")(x)
 x = layers.Dropout(0.5)(x)
-outp = layers.Dense(num_classes, activation="softmax")(x)
+outp = layers.Dense(num_classes, activation="softmax")(x) # Ergebnis kann als Wahrscheinlichkeitsverteilung interprätiert werden
 
 model = Model(inp, outp)
 
