@@ -115,8 +115,8 @@ outp = layers.Dense(num_classes, activation="softmax")(x)
 
 model = Model(inp, outp)
 
-for layer in model.layers[:-6]:
-    layer.trainable = False
+for layer in model.layers[:]:
+    layer.trainable = True
 
 # Training und Validierung
 model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
