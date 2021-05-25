@@ -4,15 +4,14 @@ import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-from tensorflow.keras.models import *
-from tensorflow.keras.applications.densenet import DenseNet121, preprocess_input
+from tensorflow.keras.models import Sequential
 import pathlib
 
 # Config
 batch_size = 32 # Größe eines Durchlaufs
 img_height = 180 # Höhe des Bildes
 img_width = 180  # Breite des Bildes
-validation_split = 0.2
+validation_split = 0.6
 
 # Modeloutput
 num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
@@ -90,13 +89,27 @@ data_augmentation = tf.keras.Sequential(
                                                  input_shape=(img_height, 
                                                               img_width,
                                                               3)),
-   # layers.experimental.preprocessing.RandomRotation(0.1),
-   # layers.experimental.preprocessing.RandomZoom(0.1),
+    layers.experimental.preprocessing.RandomRotation(0.1),
+    layers.experimental.preprocessing.RandomZoom(0.1),
   ]
 )
 
 
 # Erstellen des Modells
+model = Sequential([
+  data_augmentation,
+  layers.experimental.preprocessing.Rescaling(1./255),
+  layers.Conv2D(16, 3, padding='same', activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Conv2D(32, 3, padding='same', activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Conv2D(64, 3, padding='same', activation='relu'),
+  layers.MaxPooling2D(),
+  layers.Dropout(0.2),
+  layers.Flatten(),
+  layers.Dense(128, activation='relu'),
+  layers.Dense(num_classes)
+])
 
 inp = layers.Input((img_width, img_height, 3))
 backbone = DenseNet121(
