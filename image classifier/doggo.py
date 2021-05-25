@@ -4,7 +4,7 @@ import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import *
 from tensorflow.keras.applications.densenet import DenseNet121, preprocess_input
 import pathlib
 
