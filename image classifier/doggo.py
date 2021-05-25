@@ -12,7 +12,7 @@ import pathlib
 batch_size = 32 # Größe eines Durchlaufs
 img_height = 180 # Höhe des Bildes
 img_width = 180  # Breite des Bildes
-validation_split = 0.6
+validation_split = 0.2
 
 # Modeloutput
 num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
@@ -105,19 +105,22 @@ backbone = DenseNet121(
     input_shape=(img_width,img_height,3)
 )
 
-model = Sequential([
-  data_augmentation,
-  backbone,
-  layers.experimental.preprocessing.Rescaling(1./255),
-  layers.GlobalAveragePooling2D(data_format=None),
-  layers.Dense(1024, activation="relu"),
-  layers.Dropout(0.5),
-  layers.Dense(512, activation="relu"),
-  layers.Dropout(0.5),
-  layers.Flatten(),
-  layers.Dense(num_classes, activation="softmax")
-])
+inp = layers.Input((img_width, img_height, 3))
+backbone = DenseNet121(input_tensor=inp,
+                       weights="../input/densenet-keras/DenseNet-BC-121-32-no-top.h5",
+                       include_top=False)
+x = backbone.output
+x = layers.GlobalAveragePooling2D()(x)
+x = layers.Dense(1024, activation="relu")(x)
+x = layers.Dropout(0.5)(x)
+x = layers.Dense(512, activation="relu")(x)
+x = layers.Dropout(0.5)(x)
+outp = layers.Dense(num_classes, activation="softmax")(x)
 
+model = Model(inp, outp)
+
+for layer in model.layers[:-6]:
+    layer.trainable = False
 
 # Training und Validierung
 model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
