@@ -98,17 +98,13 @@ data_augmentation = tf.keras.Sequential(
 
 # Erstellen des Modells
 
-
+inp = layers.Input((img_width, img_height, 3))
 backbone = DenseNet121(
     weights='input/DenseNet-BC-121-32-no-top.h5',
     include_top=False,
-    input_shape=(img_width,img_height,3)
+    input_tensor=inp
 )
 
-inp = layers.Input((img_width, img_height, 3))
-backbone = DenseNet121(input_tensor=inp,
-                       weights="../input/densenet-keras/DenseNet-BC-121-32-no-top.h5",
-                       include_top=False)
 x = backbone.output
 x = layers.GlobalAveragePooling2D()(x)
 x = layers.Dense(1024, activation="relu")(x)
