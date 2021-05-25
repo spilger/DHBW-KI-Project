@@ -11,12 +11,13 @@ import pathlib
 batch_size = 32 # Größe eines Durchlaufs
 img_height = 180 # Höhe des Bildes
 img_width = 180  # Breite des Bildes
+validation_split = 0.6
 
 # Modeloutput
 num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
 
 # Training
-epochs = 100
+epochs = 20
 learning_rate = 0.001
 
 
@@ -31,7 +32,7 @@ print(image_count)
 # Vorbereitung des Trainings- und Testdatensatzes
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.2,
+  validation_split=validation_split,
   subset="training",
   shuffle=True,
   seed=469,
@@ -41,7 +42,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
 # Vorbereitung des Validierungsdatensatzes
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
-  validation_split=0.2,
+  validation_split=validation_split,
   subset="validation",
   shuffle=True,
   seed=469,
