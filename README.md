@@ -46,6 +46,19 @@ Datenquellen (Jessica)
 
 Methodik (Stichpunktartige Vorgehensweise von Micha)
 *	Vorgehensweise
+*	* Recherche zur Strukturierung neuronaler Netze zur Bild-Klassifizierung
+*	* Test zum finden einer Struktur zur Klassifikation von 5 Bildklassen (Struktur des ersten Netzes)
+*	* Erfolg - klappt mit 97% Validation Accuracy
+*	* Ok aber schafft das Netz auch mehr Klassen
+*	* Bei 120 Klassen starkes Overfitting
+*	* Lösungsansatz: Bilder in jedem Trainingsschritt zufällig verändern (zoomen, drehen, spiegeln)
+*	* Erfolg: Modell ist nicht mehr overfitted - Problem die Accuracy ist nur noch niedrig bei circa 12% in der Validation
+*	* Lösungsansatz: Komplexität mit Dense Layern und Conv2D-Layern ehöhen: Problem Trainingsaufwand mit verfügbaren Ressourcen nicht mehr möglich
+*	* Suche nach Lösungsmöglichkeiten: Idee vortrainierte Image-Classifier-Netze in Netzstruktur integrieren
+*	* Zwei Funktionierende Ansätze gefunden: 
+*	* * 1. DenseNet32_121 in Netzstruktur integrieren circa 20 Stunden Trainingsaufwand für circa 85% Validation accuracy
+*	* * 2. EfficientNet über tflite_modelmaker - neues Tensorflow Modul bietet nativ integririert Image_classifier Netze zum weitertrainieren an Test mit EfficientNet121 - Erfolg circa 90% validation accuracy und geringer Trainingsaufwand circa 1 Stunde mit verfügbaren Ressourcen
+*	* Integration in App zur lokalen Ausführung
 *	Anfang: Overfitting (zu sehr angepasst an die Testdaten)
 *	Lösung: zufälliges Drehen, Zoomen, Flippen der Bilder
 *	Validation accuracy: wurde besser, aber noch nicht optimal
