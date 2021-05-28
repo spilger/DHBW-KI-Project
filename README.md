@@ -29,7 +29,7 @@ InterviewCa 30 Minuten  Wie habt ihr das umgesetzt  Besprechung des Berichts  TG
 
 
 # Ausarbeitung
-Motivation
+Motivation (Anna-Lena)
 *	Versicherung
 *	Hund Tierheim
 *	Interessen
@@ -37,36 +37,36 @@ Motivation
 * Zielgruppe: Leute mit Handy
 * Anwendung: Foto machen oder Hochladen (Versicherung)
 
-Datenquellen
+Datenquellen (Jessica)
 *	Woher sind die Daten
 *	Was ist Stanford
 *	Wie sehen die Daten
 *	Aufbau der Daten
 *	Beispielhafte Bilder zeigen
 
-Methodik
+Methodik (Stichpunktartige Vorgehensweise von Micha)
 *	Vorgehensweise
-*	Anfang: Overfitting  zu sehr angepasst an die Testdaten
+*	Anfang: Overfitting (zu sehr angepasst an die Testdaten)
 *	Lösung: zufälliges Drehen, Zoomen, Flippen der Bilder
 *	Validation accuracy: wurde besser, aber noch nicht optimal
 *	Vorgefertigtes Modell verwenden + Flippen der Bilder: Validierung sogar besser
 
-Algorithmus 
+Algorithmus (Jessica) 
 *	Tensorflow light
 *	Neuronale Netze
 *	https://arxiv.org/pdf/1905.11946.pd 
 *	https://adventuresinmachinelearning.com/convolutional-neural-networks-tutorial-tensorflow/ 
 *	Code einblenden und erklären
 
-Ergebnisse 
+Ergebnisse (Anna-Lena)
 *	Accuracy beschreiben: Training + Validierung
 *	Grafik: Verlauf Genauigkeit (Epochen x-Achse, Y-Achse: Genauigkeit)
-*		Verweis Methodik: Kein Overfitting
+*	Verweis Methodik: Kein Overfitting
 * Loss beschreiben: Grafik
 * App reinbringen: Beschreibung, Screenshot
 
 Diskussion
 *	= Fazit?
-![image](https://user-images.githubusercontent.com/55435732/119951914-c1abd780-bf9c-11eb-8da7-9ec81ab68bcb.png)
+
 
 
