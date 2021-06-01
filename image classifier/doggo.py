@@ -11,7 +11,7 @@ import pathlib
 batch_size = 32 # Größe eines Durchlaufs
 img_height = 180 # Höhe des Bildes
 img_width = 180  # Breite des Bildes
-validation_split = 0.6
+validation_split = 0.2
 
 # Modeloutput
 num_classes = 120 # Anzahl der Klassen bzw. Hunderassen
