@@ -22,8 +22,12 @@ print(image_count)
 
 
 data = DataLoader.from_folder(data_dir)
-train_data, validation_data = data.split(0.9)
+train_data, validation_data = data.split(0.5)
 
 model = image_classifier.create(train_data, validation_data=validation_data, epochs=6, shuffle=True, learning_rate=None)
-
-model.export(export_dir='./models', tflite_filename='dogModel.tflite')
+model.export(
+    'models/', tflite_filename='trash.tflite',
+    label_filename='labels.txt', vocab_filename='vocab.txt', export_format=ExportFormat.LABEL
+)
+model.summary()
+loss, accuracy = model.evaluate(validation_data)
