@@ -82,7 +82,8 @@ first_image = image_batch[0]
 # Notice the pixels values are now in `[0,1]`.
 print(np.min(first_image), np.max(first_image))
 
-# Verhinderung einer Überanpassung durch Rotieren und Zoomen der Bilder  
+# Verhinderung einer Überanpassung durch zufälliges Rotieren sowie Zoomen der Bilder
+
 data_augmentation = tf.keras.Sequential(
   [
     layers.experimental.preprocessing.RandomFlip("horizontal", 
