@@ -54,7 +54,7 @@ Methodik (Stichpunktartige Vorgehensweise von Micha)
 *	* Lösungsansatz: Bilder in jedem Trainingsschritt zufällig verändern (zoomen, drehen, spiegeln)
 *	* Erfolg: Modell ist nicht mehr overfitted - Problem die Accuracy ist nur noch niedrig bei circa 12% in der Validation
 *	* Lösungsansatz: Komplexität mit Dense Layern und Conv2D-Layern ehöhen: Problem Trainingsaufwand mit verfügbaren Ressourcen nicht mehr möglich
-*   * Lösungsansatz: Nur die Komplexität eines Dense Layers nach den Conv2D Layers erhöhen. - Gute Accuracy
+*   * Lösungsansatz: Nur die Komplexität eines Dense Layers nach den Conv2D Layers erhöhen. - Besser, aber immer noch großer Aufwand
 *	* Suche nach Lösungsmöglichkeiten: Idee vortrainierte Image-Classifier-Netze in Netzstruktur integrieren
 *	* Zwei Funktionierende Ansätze gefunden: 
 *	* * 1. DenseNet32_121 in Netzstruktur integrieren circa 20 Stunden Trainingsaufwand für circa 85% Validation accuracy
