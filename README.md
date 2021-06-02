@@ -81,6 +81,15 @@ Ergebnisse (Anna-Lena)
 
 Diskussion
 *	= Fazit?
+*	Diskussion
+*	Objektiv betrachtete Ergebnisse 
+* Bezüge herstellen
+*	Interpretieren
+*	Mutmaßungen
+*	Was würde passieren, wenn das und das passieren würde
+*	Zielstellung
+*	Was haben uns die Ergebnisse gebracht
+
 
 
 
