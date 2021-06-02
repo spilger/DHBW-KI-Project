@@ -36,6 +36,8 @@ Motivation (Anna-Lena)
 *	Ziel: App 
 * Zielgruppe: Leute mit Handy
 * Anwendung: Foto machen oder Hochladen (Versicherung)
+* Zielstellung: die wichtigsten 90%? Hunderassen erkennen
+* Fragestellung: Können Mischlinge erkannt werden?
 
 Datenquellen (Jessica)
 *	Woher sind die Daten
@@ -73,6 +75,7 @@ Algorithmus (Jessica)
 *	Code einblenden und erklären
 
 Ergebnisse (Anna-Lena)
+* Epochen: erhöhen ==> ab gewisser Anzahl stagnieren wird nur der Test besser (Überanpassung), Stopp: Maximum in der Validationaccuray
 *	Accuracy beschreiben: Training + Validierung
 *	Grafik: Verlauf Genauigkeit (Epochen x-Achse, Y-Achse: Genauigkeit)
 *	Verweis Methodik: Kein Overfitting
@@ -87,9 +90,11 @@ Diskussion
 *	Was würde passieren, wenn das und das passieren würde
 *	Zielstellung
 *	Was haben uns die Ergebnisse gebracht
-*	Fazit
+*	Fazit und Ausblick
 
-
-* 
+* Schwachstelle: Mischlinge (z. B. Labradudel) können nicht immer zuverlässig erkannt => Lösung: Mischlingsbilder
+* Schwachstelle: 350? anerkannte Hunderasse, wir betrachten nur 120? => Lösung: die Hunderassen miteinbezieht => Aber: Wir decken 90%? der wichtigsten Hund ab. mehr Klassen = anderes Modell verwenden und Overfitting vermeiden
+* Zielstellung: die wichtigsten 90%? Hunderassen erkennen + Mischlinge teilweise erkennen unter bestimmten Bedingungen
+* EffificientNet: Leistungsfähige Ressourcen weiternutzen => Nicht von 0 angefangen (wäre dabei das gleiche Resultat möglich gewesen unter Betrachtung Ressourcen (Zeit, Aufwand, Effizienz, Genauigkeit) 
 
 
