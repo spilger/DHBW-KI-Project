@@ -97,4 +97,5 @@ Diskussion
 * Zielstellung: die wichtigsten 90%? Hunderassen erkennen + Mischlinge teilweise erkennen unter bestimmten Bedingungen
 * EffificientNet: Leistungsfähige Ressourcen weiternutzen => Nicht von 0 angefangen (wäre dabei das gleiche Resultat möglich gewesen unter Betrachtung Ressourcen (Zeit, Aufwand, Effizienz, Genauigkeit) 
 
-
+* Datenmappen
+* UI
