@@ -80,8 +80,6 @@ Ergebnisse (Anna-Lena)
 * App reinbringen: Beschreibung, Screenshot
 
 Diskussion
-*	= Fazit?
-*	Diskussion
 *	Objektiv betrachtete Ergebnisse 
 * Bezüge herstellen
 *	Interpretieren
@@ -89,7 +87,9 @@ Diskussion
 *	Was würde passieren, wenn das und das passieren würde
 *	Zielstellung
 *	Was haben uns die Ergebnisse gebracht
+*	Fazit
 
 
+* 
 
 
